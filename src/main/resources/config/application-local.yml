@@ -1,0 +1,29 @@
+##############
+### local
+##############
+
+server:
+  port: 8080
+  ssl:
+    key-store: classpath:baseldung.p12
+    key-store-password: 123456
+    key-store-type: PKCS12
+    key-alias: baeldung
+
+
+keycloak:
+  realm: spirngbootkeycloak
+  # client
+  resource: simple-api
+  # keycloak URL
+  auth-server-url: https://keycloak.192.168.0.94.sslip.io/
+  ssl-required: external
+  credentials.secret: vJTUKY47r3Oa5ocj4vd8Y3qNa8qclJ9e
+  use-resource-role-mappings: true
+
+spring:
+  security:
+    user:
+      name: user
+      password: 1234
+

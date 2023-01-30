@@ -1,0 +1,27 @@
+apiVersion: skaffold/v2beta29
+kind: Config
+
+profiles:
+  - name: local
+    build:
+      local:
+        push: false
+      artifacts:
+        # - image: madyoung77/demo
+        - image: simple-api
+          jib:
+            args:
+              - -DskipTests
+              # - "-Djib.container.environment=SPRING_PROFILES_ACTIVE=dev"           
+            fromImage: eclipse-temurin:17.0.2_8-jre
+    deploy:
+      kubectl:
+        manifests:
+          - k8s/dev/demo-api-deploy.yaml
+          - k8s/dev/demo-api-ingress.yaml
+    portForward:
+    - resourceType: service
+      resourceName: simple-api-svc
+      namespace: api
+      port: 8080
+      localPort: 9320

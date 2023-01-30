@@ -1,0 +1,21 @@
+#############
+### 공통 
+##############
+
+spring:
+  application:
+    name: simple-api
+  profiles:
+    active: local
+  banner:
+    location: "classpath:config/app-banner.txt"
+
+app-info:
+  build:
+    version: '@project.version@'
+    timestamp: '@app.build.timestamp@'
+
+ 
+  
+ 
+  

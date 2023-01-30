@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: simple-api-svc
+  namespace: api
+spec:
+  selector:
+    app: simple-api
+  ports:
+  - protocol: TCP
+    name: http
+    port: 8080
+    targetPort: http
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: simple-api-deploy
+  namespace: api
+  labels:
+    app: simple-api
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: simple-api
+  template:
+    metadata:
+      labels:
+        app: simple-api
+    spec:
+      containers:
+        - name: simple-api
+          image: simple-api
+          ports:
+          - name: http
+            containerPort: 8080
